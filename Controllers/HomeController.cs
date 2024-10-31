@@ -12,16 +12,43 @@ namespace UserInfoApp.Controller
         {
             _dbContext = context;
         }
-
-        public async Task<IActionResult> Index(string name, int page = 1, SortState sortOrder = SortState.LastNameAsc)
+    
+        public async Task<IActionResult> Index(string selectedVal, int page = 1, FilterMode filterMode= FilterMode.FirstName, SortState sortOrder = SortState.LastNameAsc)
         {
             int pageSize = 3;
 
             IQueryable<User>? users = _dbContext.Users; 
 
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(selectedVal))
             {
-                users = users.Where(p => p.FirstName!.Contains(name));
+                switch(filterMode)
+                {
+                    case FilterMode.LastName:
+                    {
+                         users = users.Where(p => p.LastName!.Contains(selectedVal));
+                        break;
+                    }
+                    case FilterMode.FirstName:
+                    {
+                         users = users.Where(p => p.FirstName!.Contains(selectedVal));
+                        break;
+                    }
+                    case FilterMode.PatronymicName:
+                    {
+                         users = users.Where(p => p.PatronymicName!.Contains(selectedVal));
+                        break;
+                    }
+                    case FilterMode.PhoneNumber:
+                    {
+                         users = users.Where(p => p.PhoneNumber!.Contains(selectedVal));
+                        break;
+                    }
+                    case FilterMode.EmailAddress:
+                    {
+                         users = users.Where(p => p.EmailAddress!.Contains(selectedVal));
+                        break;
+                    }
+                }
             }
 
             switch (sortOrder)
@@ -46,7 +73,7 @@ namespace UserInfoApp.Controller
             IndexViewModel viewModel = new IndexViewModel(
                 items,
                 new PageViewModel(count, page, pageSize),
-                new FilterViewModel( name),
+                new FilterViewModel(selectedVal, filterMode),
                 new SortViewModel(sortOrder)
             );
            

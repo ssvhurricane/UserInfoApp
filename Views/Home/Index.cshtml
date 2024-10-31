@@ -13,11 +13,16 @@
 </style>
 
 <h2>Список пользователей</h2>
+
 <p><a asp-action="Create">Добавить пользователя</a></p>
 
-<form method="get">
-    <label>Имя: </label>
-    <input name="name" value="@Model.FilterViewModel.SelectedName" />
+<form  asp-controller="Home" asp-action="Index" method="get">
+    <select name ="filterMode" asp-for="@Model.FilterViewModel.FilterModeValue" asp-items="Html.GetEnumSelectList<FilterMode>()">
+        
+    </select>
+
+</select>
+    <input name="selectedVal" value="@Model.FilterViewModel.SelectedValue" />
     
     <input type="submit" value="Фильтр" />
 </form>
@@ -25,9 +30,9 @@
 <table class="table">
      <tr>
         <th><a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.LastNameSort)"
-               asp-route-name="@(Model.FilterViewModel.SelectedName)">Фамилия</a></th>
+               asp-route-name="@(Model.FilterViewModel.SelectedValue)">Фамилия</a></th>
         <th><a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.FirstNameSort)"
-               asp-route-name="@(Model.FilterViewModel.SelectedName)">Имя</a></th>
+               asp-route-name="@(Model.FilterViewModel.SelectedValue)">Имя</a></th>
         <th>Отчество</th>
         <th>Почта</th><th>Телефон</th><th></th><th></th><th></th></tr>
     @foreach (var item in Model.Users)
@@ -53,5 +58,5 @@
     }
 </table>
 <page-link page-model="Model.PageViewModel" page-action="Index"
-           page-url-name="@(Model.FilterViewModel.SelectedName)"
+           page-url-name="@(Model.FilterViewModel.SelectedValue)"
            page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>

@@ -2,11 +2,13 @@ namespace UserInfoApp.Model
 {
     public class FilterViewModel
     {
-        public string SelectedName { get; } 
+        public string SelectedValue { get; } 
+        public FilterMode FilterModeValue { get; }
 
-        public FilterViewModel( string name)
+        public FilterViewModel(string selectedVal, FilterMode filterMode)
         {
-            SelectedName = name;
+            SelectedValue = selectedVal;
+            FilterModeValue = filterMode;
         }
     }
 }
