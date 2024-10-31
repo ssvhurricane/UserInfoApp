@@ -93,7 +93,11 @@ namespace UserInfoApp.Controller
         public async Task<IActionResult> Create(User user)
         {
             _dbContext.Users.Add(user);
+
+            if(user.Passport != null) _dbContext.Passports.Add(user.Passport);
+            
             await _dbContext.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
 
@@ -104,6 +108,10 @@ namespace UserInfoApp.Controller
             {
                 User user = new User { Id = id.Value };
                 _dbContext.Entry(user).State = EntityState.Deleted;
+
+                Passport passport = new Passport  { Id = user.Id };
+                  _dbContext.Entry(passport).State = EntityState.Deleted;
+
                 await _dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -112,20 +120,32 @@ namespace UserInfoApp.Controller
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if(id!=null)
+            if(id != null)
             {
-                User? user = await _dbContext.Users.FirstOrDefaultAsync(p=>p.Id==id);
-                if (user != null) return View(user);
+                User? user = await _dbContext.Users.FirstOrDefaultAsync(userInfo => userInfo.Id == id);
+
+                if (user != null) 
+                {
+                    user.Passport = await  _dbContext.Passports.FirstOrDefaultAsync(passportInfo => passportInfo.Id == user.Id);
+
+                    return View(user);
+                }
             }
             return NotFound();
         }
 
          public async Task<IActionResult> More(int? id)
         {
-            if(id!=null)
+           if(id != null)
             {
-                User? user = await _dbContext.Users.FirstOrDefaultAsync(p=>p.Id==id);
-                if (user != null) return View(user);
+                User? user = await _dbContext.Users.FirstOrDefaultAsync(userInfo => userInfo.Id == id);
+
+                if (user != null) 
+                {
+                    user.Passport = await  _dbContext.Passports.FirstOrDefaultAsync(passportInfo => passportInfo.Id == user.Id);
+
+                    return View(user);
+                }
             }
             return NotFound();
         }
@@ -133,8 +153,15 @@ namespace UserInfoApp.Controller
         [HttpPost]
         public async Task<IActionResult> Edit(User user)
         {
-            _dbContext.Users.Update(user);
+            var passport =  _dbContext.Passports.FirstOrDefault(p => p.Id == user.Id);
+
+            if (passport != null)
+                _dbContext.Passports.Update(passport);
+            if(user != null)
+                _dbContext.Users.Update(user);
+              
             await _dbContext.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
     }

@@ -13,5 +13,7 @@ namespace UserInfoApp.Model
          public string? EmailAddress { get; set; }
 
          public string? PhoneNumber { get; set; }
+
+         public Passport? Passport{ get; set; } = new();
     }
 }

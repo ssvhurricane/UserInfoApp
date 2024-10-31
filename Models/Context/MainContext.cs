@@ -6,7 +6,7 @@ namespace UserInfoApp.Model.Context
     {
         public DbSet<User> Users { get; set; } = null!;
 
-       // public DbSet<Passport> Passports { get; set; } = null!;
+        public DbSet<Passport> Passports { get; set; } = null!;
 
         public MainContext(DbContextOptions<MainContext> options)
             : base(options)

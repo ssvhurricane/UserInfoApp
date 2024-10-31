@@ -5,6 +5,7 @@
 <h2> Добавление пользователя</h2>
 <p><a asp-action="Back">К списку пользователей</a></p>
 <form asp-action="edit" asp-controller="home" asp-route-id="@Model.Id">
+   <h3>Основные данные</h3>
     <p>
         <label asp-for="LastName">Фамилия</label><br />
         <input type="text" asp-for="LastName" />
@@ -25,6 +26,28 @@
         <label asp-for="PhoneNumber">Телефон</label><br />
         <input type="text" asp-for="PhoneNumber" />
     </p>
+
+    <h3>Паспортные данные</h3>
+     <p>
+        <label asp-for="Passport.Number">номер паспорта</label><br />
+        <input type="text" asp-for="Passport.Number" />
+     </p>
+      <p>
+        <label asp-for="Passport.DateOfBirth">Дата рождения</label><br />
+        <input type="text" asp-for="Passport.DateOfBirth" />
+     </p>
+      <p>
+        <label asp-for="Passport.PlaceOfBirth">Место рождения</label><br />
+        <input type="text" asp-for="Passport.PlaceOfBirth" />
+     </p>
+      <p>
+        <label asp-for="Passport.RegistrationAddress">Адрес регистрации</label><br />
+        <input type="text" asp-for="Passport.RegistrationAddress" />
+     </p>
+      <p>
+        <label asp-for="Passport. AddressOfResidence">Адрес проживания</label><br />
+        <input type="text" asp-for="Passport.AddressOfResidence" />
+     </p>
     <p>
         <input type="submit" value="Сохранить" />
     </p>
