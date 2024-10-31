@@ -11,22 +11,27 @@
     <p>
         <label asp-for="LastName">Фамилия</label><br />
         <input type="text" asp-for="LastName" />
+        <span asp-validation-for="LastName"  />
     </p>
     <p>
         <label asp-for="FirstName">Имя</label><br />
         <input type="text" asp-for="FirstName" />
+        <span asp-validation-for="FirstName"  />
     </p>
     <p>
         <label asp-for="PatronymicName">Отчество</label><br />
         <input type="text" asp-for="PatronymicName" />
+        <span asp-validation-for="PatronymicName"  />
     </p>
      <p>
         <label asp-for="EmailAddress">Почта</label><br />
         <input type="text" asp-for="EmailAddress" />
+        <span asp-validation-for="EmailAddress"  />
     </p>
      <p>
         <label asp-for="PhoneNumber">Телефон</label><br />
         <input type="text" asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"  />
     </p>
 
     <h3>Паспортные данные</h3>
@@ -54,3 +59,7 @@
         <input type="submit" value="Отправить" />
     </p>
 </form>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>

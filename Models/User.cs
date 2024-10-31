@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace UserInfoApp.Model
 {
-    public class User
+    public class User : IValidatableObject
     {
          public int Id { get; set; }
 
@@ -15,5 +17,14 @@ namespace UserInfoApp.Model
          public string? PhoneNumber { get; set; }
 
          public Passport? Passport{ get; set; } = new();
+
+         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errors = new List<ValidationResult>();
+    
+             // TODO:
+    
+            return errors;
+        }
     }
 }
