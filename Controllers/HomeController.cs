@@ -13,9 +13,44 @@ namespace UserInfoApp.Controller
             _dbContext = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, int page = 1, SortState sortOrder = SortState.LastNameAsc)
         {
-            return View(await _dbContext.Users.ToListAsync());
+            int pageSize = 3;
+
+            IQueryable<User>? users = _dbContext.Users; 
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                users = users.Where(p => p.FirstName!.Contains(name));
+            }
+
+            switch (sortOrder)
+            {
+                case SortState.LastNameDesc:
+                    users = users.OrderByDescending(s => s.LastName);
+                    break;
+                case SortState.FirstNameDesc:
+                    users = users.OrderByDescending(s => s.FirstName);
+                    break;
+                 case SortState.FirstNameAsc:
+                    users = users.OrderBy(s => s.FirstName);
+                    break;
+                default:
+                    users = users.OrderBy(s => s.LastName);
+                    break;
+            }
+ 
+            var count = await users.CountAsync();
+            var items = await users.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+           
+            IndexViewModel viewModel = new IndexViewModel(
+                items,
+                new PageViewModel(count, page, pageSize),
+                new FilterViewModel( name),
+                new SortViewModel(sortOrder)
+            );
+           
+            return View(viewModel);
         }
 
         public IActionResult Create()

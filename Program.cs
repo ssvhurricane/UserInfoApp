@@ -9,7 +9,7 @@ namespace UserInfoApp
         {
             var builder = WebApplication.CreateBuilder(args);
            
-            string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+            string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
          
             builder.Services.AddDbContext<MainContext>(options => options.UseSqlServer(connection));
 
