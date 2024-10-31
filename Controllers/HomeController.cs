@@ -2,15 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserInfoApp.Model;
 using UserInfoApp.Model.Context;
+using UserInfoApp.Service;
 
 namespace UserInfoApp.Controller
 {
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private MainContext _dbContext;
-        public HomeController(MainContext context)
+        private ValidationService _validationService;
+
+        public HomeController(MainContext context, ValidationService validationService)
         {
             _dbContext = context;
+            _validationService = validationService;
         }
     
         public async Task<IActionResult> Index(string selectedVal, int page = 1, FilterMode filterMode= FilterMode.FirstName, SortState sortOrder = SortState.LastNameAsc)
@@ -92,12 +96,14 @@ namespace UserInfoApp.Controller
         [HttpPost]
         public async Task<IActionResult> Create(User user)
         {
-            _dbContext.Users.Add(user);
+            if(_validationService != null && _validationService.ValidateData(user))
+            {
+                _dbContext.Users.Add(user);
 
-            if(user.Passport != null) _dbContext.Passports.Add(user.Passport);
-            
-            await _dbContext.SaveChangesAsync();
-
+                if(user.Passport != null) _dbContext.Passports.Add(user.Passport);
+                
+                await _dbContext.SaveChangesAsync();
+            }
             return RedirectToAction("Index");
         }
 

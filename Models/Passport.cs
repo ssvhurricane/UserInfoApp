@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace UserInfoApp.Model
 {
@@ -13,7 +14,7 @@ namespace UserInfoApp.Model
          public string? PlaceOfBirth { get; set; }
 
          public string? RegistrationAddress { get; set; }
-
+        
          public string?  AddressOfResidence { get; set; }
        
          public int UserId { get; set; } 

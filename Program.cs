@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using UserInfoApp.Middleware;
 using UserInfoApp.Model.Context;
+using UserInfoApp.Service;
 
 namespace UserInfoApp
 {
@@ -15,7 +17,11 @@ namespace UserInfoApp
 
             builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+            builder.Services.AddSingleton<ValidationService>();
+
+            var app = builder.Build(); 
+            
+            app.UseMiddleware<ValidationMiddleware>();
 
             app.MapDefaultControllerRoute();
 
