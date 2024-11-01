@@ -16,7 +16,7 @@
 
 <p><a asp-action="Create">Добавить пользователя</a></p>
 
-<form  asp-controller="Home" asp-action="Index" method="get">
+<form  asp-controller="Home" asp-action="Index" method="get" id = "testFilterId">
     <select name ="filterMode" asp-for="@Model.FilterViewModel.FilterModeValue" asp-items="Html.GetEnumSelectList<FilterMode>()">
         
     </select>
@@ -24,7 +24,7 @@
 </select>
     <input name="selectedVal" value="@Model.FilterViewModel.SelectedValue" />
     
-    <input type="submit" value="Фильтр" />
+    <input type="submit" value="Фильтр" id = "testFilterIdBtn"/>
 </form>
 
 <table class="table">
