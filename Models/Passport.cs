@@ -11,7 +11,7 @@ namespace UserInfoApp.Model
          public string? Number { get; set; }
 
          [DataType(DataType.Text)]
-         [RegularExpression(@"^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$", ErrorMessage = "Неправильный формат даты! (например, 11.11.1111)")]
+         [RegularExpression(@"^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$", ErrorMessage = "Неправильный формат даты! (например, 11.11.1999)")]
          public string? DateOfBirth { get; set; }
 
          [DataType(DataType.Text)]
