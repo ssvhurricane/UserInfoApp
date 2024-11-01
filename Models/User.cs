@@ -19,9 +19,11 @@ namespace UserInfoApp.Model
          public string? LastName { get; set; }
      
          [DataType(DataType.EmailAddress)]
+         [RegularExpression(@"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", ErrorMessage = "Не корректный адрес почты! (например, mymail@gmail.com)")]
          public string? EmailAddress { get; set; }
 
-         [DataType(DataType.PhoneNumber)] 
+         [DataType(DataType.PhoneNumber)]
+         [RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Не валидный номер телефона! (например, 79993716655)")]
          public string? PhoneNumber { get; set; }
 
          public Passport? Passport{ get; set; } = new();

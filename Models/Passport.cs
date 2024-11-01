@@ -6,10 +6,12 @@ namespace UserInfoApp.Model
    {
          public int Id { get; set; }
 
+         [DataType(DataType.Text)]
+         [RegularExpression(@"^\d{4}\s\d{6}$", ErrorMessage = "Неправильный формат серия и номера паспорта! (например, 1111 222222)")]
          public string? Number { get; set; }
 
          [DataType(DataType.Text)]
-         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+         [RegularExpression(@"^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$", ErrorMessage = "Неправильный формат даты! (например, 11.11.1111)")]
          public string? DateOfBirth { get; set; }
 
          [DataType(DataType.Text)]
