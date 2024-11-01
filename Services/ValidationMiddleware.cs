@@ -10,12 +10,14 @@ namespace UserInfoApp.Middleware
         public ValidationMiddleware(ValidationService validationService, RequestDelegate next)
         {
             _validationService = validationService;
+
             _next = next;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
             _validationService.SendHeader(context);
+            
             await _next.Invoke(context);
         }
     }

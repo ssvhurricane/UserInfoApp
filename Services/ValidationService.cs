@@ -8,7 +8,7 @@ namespace UserInfoApp.Service
         public void SendHeader(HttpContext context)
         {
             if(!context.Response.Headers.ContainsKey(ValidationServiceConstants.XDEVICEKEY))
-                 context.Response.Headers.Add(ValidationServiceConstants.XDEVICEKEY,
+                 context.Response.Headers.Append(ValidationServiceConstants.XDEVICEKEY,
                                               ValidationServiceConstants.XDEVICE_MODE.ToString());
         }
 
@@ -70,7 +70,7 @@ namespace UserInfoApp.Service
                 && !string.IsNullOrEmpty(user.Passport?.PlaceOfBirth)
                 && !string.IsNullOrEmpty(user.Passport?.RegistrationAddress))return true;
             
-            return true;
+            return false;
         }
     }
 }

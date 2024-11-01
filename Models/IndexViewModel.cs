@@ -10,8 +10,11 @@ namespace UserInfoApp.Model
             FilterViewModel filterViewModel, SortViewModel sortViewModel)
         {
             Users = users;
+
             PageViewModel = pageViewModel;
+
             FilterViewModel = filterViewModel;
+            
             SortViewModel = sortViewModel;
         }
     }

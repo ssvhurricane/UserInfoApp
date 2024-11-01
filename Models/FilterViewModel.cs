@@ -8,6 +8,7 @@ namespace UserInfoApp.Model
         public FilterViewModel(string selectedVal, FilterMode filterMode)
         {
             SelectedValue = selectedVal;
+            
             FilterModeValue = filterMode;
         }
     }

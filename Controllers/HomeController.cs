@@ -14,7 +14,7 @@ namespace UserInfoApp.Controller
         public HomeController(MainContext context, ValidationService validationService)
         {
             _dbContext = context;
-            
+
             _validationService = validationService;
         }
     
@@ -91,7 +91,7 @@ namespace UserInfoApp.Controller
         }
         public IActionResult Back()
         {
-         return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -107,6 +107,7 @@ namespace UserInfoApp.Controller
 
                 return  RedirectToAction("Index");
             }
+
             return View();
         }
 
@@ -124,6 +125,7 @@ namespace UserInfoApp.Controller
                 await _dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
             return NotFound();
         }
 
@@ -141,6 +143,7 @@ namespace UserInfoApp.Controller
                     return View(user);
                 }
             }
+            
             return NotFound();
         }
     }
