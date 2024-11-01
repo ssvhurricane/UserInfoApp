@@ -14,6 +14,7 @@ namespace UserInfoApp.Controller
         public HomeController(MainContext context, ValidationService validationService)
         {
             _dbContext = context;
+            
             _validationService = validationService;
         }
     
@@ -103,8 +104,10 @@ namespace UserInfoApp.Controller
                 if(user.Passport != null) _dbContext.Passports.Add(user.Passport);
                 
                 await _dbContext.SaveChangesAsync();
+
+                return  RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View();
         }
 
         [HttpPost]
@@ -124,23 +127,8 @@ namespace UserInfoApp.Controller
             return NotFound();
         }
 
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if(id != null)
-            {
-                User? user = await _dbContext.Users.FirstOrDefaultAsync(userInfo => userInfo.Id == id);
 
-                if (user != null) 
-                {
-                    user.Passport = await  _dbContext.Passports.FirstOrDefaultAsync(passportInfo => passportInfo.Id == user.Id);
-
-                    return View(user);
-                }
-            }
-            return NotFound();
-        }
-
-         public async Task<IActionResult> More(int? id)
+        public async Task<IActionResult> More(int? id)
         {
            if(id != null)
             {
@@ -154,21 +142,6 @@ namespace UserInfoApp.Controller
                 }
             }
             return NotFound();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(User user)
-        {
-            var passport =  _dbContext.Passports.FirstOrDefault(p => p.Id == user.Id);
-
-            if (passport != null)
-                _dbContext.Passports.Update(passport);
-            if(user != null)
-                _dbContext.Users.Update(user);
-              
-            await _dbContext.SaveChangesAsync();
-
-            return RedirectToAction("Index");
         }
     }
 }

@@ -34,7 +34,7 @@
         <th><a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.FirstNameSort)"
                asp-route-name="@(Model.FilterViewModel.SelectedValue)">Имя</a></th>
         <th>Отчество</th>
-        <th>Почта</th><th>Телефон</th><th></th><th></th><th></th></tr>
+        <th>Почта</th><th>Телефон</th><th></th><th></th></tr>
     @foreach (var item in Model.Users)
     {
         <tr>
@@ -45,9 +45,6 @@
             <td>@item.PhoneNumber</td> 
             <td>
                 <a asp-action="More" asp-controller="Home" asp-route-id="@item.Id">Подробнее</a>
-            </td>
-             <td> 
-                <a asp-action="Edit" asp-controller="Home" asp-route-id="@item.Id">Изменить</a>
             </td>
             <td>
                 <form asp-controller="Home" asp-action="Delete" method="post"  asp-route-id="@item.Id">
